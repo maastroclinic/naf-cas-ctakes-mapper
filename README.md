@@ -9,11 +9,12 @@ Where cTakes is English only, SpaCy contains trained models (non medical) for se
 
 cTakes is build on UIMA which has its serialization formats (e.g. CAS XMI).
 NAF (KAFDocument) is chosen over the UIMA CAS XMI format for its native Python and Java implementations.
-Mapping between NAF and CAS is done in Java using cTakes UIMA's namespace.
+Mapping between NAF and CAS is implemented in Java using cTakes UIMA's namespace.
  
 ### Implemented features
 Mapped Modules:
- - Text
+* [ ] Text
+
  - Token
 
 ### Usage
