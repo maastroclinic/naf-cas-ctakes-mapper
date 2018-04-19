@@ -132,10 +132,13 @@ public class NafJCasMapper {
                         break;
                     case O:
                         PunctuationToken punctuationToken = new PunctuationToken(jCas, startOffset, endOffset);
+                        String partOfSpeech = term.getMorphofeat();
+                        punctuationToken.setPartOfSpeech(partOfSpeech);
                         punctuationToken.addToIndexes();
                         break;
                     default:
                         WordToken wordToken = new WordToken(jCas, startOffset, endOffset);
+                        wordToken.setPartOfSpeech(pos.name());
                         wordToken.addToIndexes();
                         break;
                 }
