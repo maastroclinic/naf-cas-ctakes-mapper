@@ -5,11 +5,14 @@ import org.apache.ctakes.core.cc.XmiWriterCasConsumerCtakes;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.analysis_engine.ResultSpecification;
 import org.apache.uima.cas.impl.XmiCasDeserializer;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.factory.JCasFactory;
+import org.apache.uima.fit.factory.TypeSystemDescriptionFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.apache.uima.resource.metadata.TypeSystemDescription;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
@@ -29,8 +32,15 @@ public class NafJCasMapperTests {
 
         JCas jcas = NafJCasMapper.getJCas(kafDocument);
 
+        TypeSystemDescription typeSystemDescription =
+                // use the uimafit method of finding available type system
+                // descriptor via META-INF/org.apache.uima.fit/types.txt
+                // (found in ctakes-type-system/src/main/resources)
+                TypeSystemDescriptionFactory.createTypeSystemDescription();
+
         AnalysisEngine xWriter = AnalysisEngineFactory.createEngine(
                 XmiWriterCasConsumerCtakes.class,
+                typeSystemDescription,
                 XmiWriterCasConsumerCtakes.PARAM_OUTPUTDIR,
                 "./out");
 
