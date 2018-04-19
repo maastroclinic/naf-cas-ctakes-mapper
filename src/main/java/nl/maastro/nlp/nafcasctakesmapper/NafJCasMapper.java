@@ -1,11 +1,10 @@
 package nl.maastro.nlp.nafcasctakesmapper;
 
 
-import ixa.kaflib.KAFDocument;
-import ixa.kaflib.Term;
-import ixa.kaflib.WF;
+import ixa.kaflib.*;
 import org.apache.ctakes.typesystem.type.structured.DocumentID;
 import org.apache.ctakes.typesystem.type.syntax.*;
+import org.apache.ctakes.typesystem.type.syntax.Chunk;
 import org.apache.ctakes.typesystem.type.textspan.Segment;
 import org.apache.ctakes.typesystem.type.textspan.Sentence;
 import org.apache.uima.fit.factory.JCasFactory;
@@ -49,6 +48,7 @@ public class NafJCasMapper {
 
             setSentenceTextSpan(kafDocument, jCas);
             setTokens(kafDocument, jCas);
+            setChunkType(kafDocument, jCas);
             logger.debug("CAS object generated");
         } catch (Exception e) {
             e.printStackTrace();
@@ -107,7 +107,7 @@ public class NafJCasMapper {
                 pos = valueOf(term.getMorphofeat());
             }
             catch(IllegalArgumentException e){
-                logger.warn("Pos not recognized=" + term.getMorphofeat(), e);
+                logger.warn("No POS " + term.getMorphofeat() + " -> POS set to 'O'");
             }
 
 
@@ -166,6 +166,30 @@ public class NafJCasMapper {
      */
     private static JCas setChunkType(KAFDocument kafDocument, JCas jCas){
 
+        List<Tree> construents = kafDocument.getConstituents();
+
+
+        construents.forEach(tree ->{
+
+            tree.getRoot().getChildren().forEach(child -> {
+                if (child instanceof NonTerminal) {
+                    logger.info("true");
+                    NonTerminal nt = (NonTerminal) child;
+                    nt.getLabel();
+                }
+            });
+
+
+
+
+//            int begin = span.getFirstTarget().getWFs().get(0).getOffset();
+//            int end = span.getTargets().get(span.getTargets().size()-1).getWFs();
+//
+//            Chunk chunk = new Chunk(jCas, begin, end);
+//            chunk.setChunkType(kafChunk.);
+
+
+        });
 
 
         return jCas;

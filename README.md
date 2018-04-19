@@ -12,11 +12,12 @@ NAF (KAFDocument) is chosen over the UIMA CAS XMI format for its native Python a
 Mapping between NAF and CAS is implemented in Java using cTakes UIMA's namespace.
  
 ### Implemented features
-Mapped Modules:
-* [ ] Text
-
- - Token
-
+Mapped Modules (partly done):
+ - [x] Text
+ - [x] Token
+ - [x] POS
+ - [ ] Chunk (todo) 
+ 
 ### Usage
 See test classes
 
@@ -26,5 +27,5 @@ See test classes
 - [Apache UIMA](https://uima.apache.org/)
 - [UMLS](https://www.nlm.nih.gov/research/umls/)
 - [SpaCy](https://spacy.io/)
-- [KAFDocument (Java)](https://github.com/ixa-ehu/kaflib)
-- [KAFDocument (Python)](https://github.com/cltl/KafNafParserPy)
+- NAF [GitHub](https://github.com/newsreader/NAF) / 
+[PDF](http://www.newsreader-project.eu/files/2013/01/techreport.pdf) specs & [Java](https://github.com/ixa-ehu/kaflib) / [Python](https://github.com/cltl/KafNafParserPy) implementations
